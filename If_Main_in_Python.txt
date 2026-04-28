@@ -1,0 +1,59 @@
+What does if __name__ == "__main__": mean?
+
+In Python, every file has a special variable called __name__.
+
+When you run the file directly, __name__ is set to "__main__"
+When you import the file as a module, __name__ becomes the file’s 
+name
+
+So this line:
+
+if __name__ == "__main__":
+
+means:
+“Run the following code only if this file is executed directly, not when imported.”
+
+it’s optional, but with an important caveat.
+
+✅ When you don’t need it
+
+If you’re writing a quick script (like this one) and you always run it directly, you can remove:
+
+if __name__ == "__main__":
+
+and the code will still work exactly the same.
+
+⚠️ When you do need it
+
+It becomes important when your file might be imported into another Python file.
+
+Without it:
+
+All the code (input reading, execution, etc.) will run automatically on 
+import ❌
+
+With it:
+
+Only functions/classes are imported
+The main execution code does not run unless explicitly executed ✅
+🔍 Example
+Without it:
+print("Hello")
+
+If another file does:
+
+import myfile
+
+👉 "Hello" will print immediately (often unwanted)
+
+With it:
+if __name__ == "__main__":
+    print("Hello")
+
+Now:
+
+Running directly → prints "Hello"
+Importing → prints nothing
+🧠 In your code’s context
+For competitive programming / simple scripts → optional
+For reusable modules or larger projects → strongly recommended
