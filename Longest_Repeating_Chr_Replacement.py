@@ -53,3 +53,47 @@ def CharReplacement(s,k):
 s=input().strip().upper()
 k=int(input())
 print(CharReplacement(s,k))
+
+'''The Rule:
+If the number of characters you need to change, (r - l + 1) - maxfreq, becomes 
+greater than k, your window has become invalid—you don't have enough 
+replacement points (k) to turn the whole window into a single character.
+
+What the while loop does:
+When the window breaks the rule, the while loop shrinks the window from 
+the left (l) until it becomes valid again:
+
+seen[s[l]] -= 1: Decrements the count of the character leaving the window.
+
+l += 1: Moves the left side of the window one step to the right.
+
+Step-by-Step Dry Run Example
+Let's trace the code with:s = "AABABBA" k = 1 (You can change at most 1 character)
+Initial State:l = 0, 
+maxfreq = 0 Step 1: r = 0, character = 'A'seen = {'A': 1}
+maxfreq = 1 Window length (r - l + 1): 0 - 0 + 1 = 1 
+
+Replacements needed: 1 - 1 = 0 Is 0 > k (0 > 1)? No -> while loop does not run.
+Current valid window: "A" (Length: 1)
+
+Step 2: r = 1, character = 'A'seen = {'A': 2}
+maxfreq = 2 Window length: 1 - 0 + 1 = 2 Replacements needed: 2 - 2 = 0 Is 0 > k (0 > 1)? 
+No -> while loop does not run.
+Current valid window: "AA" (Length: 2)Step 3: r = 2, character = 'B'
+seen = {'A': 2, 'B': 1} maxfreq = 2 Window length: 2 - 0 + 1 = 3 
+Replacements needed: 3 - 2 = 1 Is 1 > k (1 > 1)? No -> while loop does not run.
+Current valid window: "AAB" (Length: 3, replace 1 'B' to make "AAA")
+
+Step 4: r = 3, character = 'A'seen = {'A': 3, 'B': 1}
+
+maxfreq = 3 Window length: 3 - 0 + 1 = 4 Replacements needed: 4 - 3 = 1 Is 1 > k (1 > 1)? 
+No -> while loop does not run. Current valid window: "AABA" 
+(Length: 4, replace 1 'B' to make "AAAA") 
+
+Step 5: r = 4, character = 'B'
+seen = {'A': 3, 'B': 2} maxfreq = 3 Window length: 4 - 0 + 1 = 5 ("AABAB") 
+Replacements needed: 5 - 3 = 2 Now, notice: 
+
+Replacements needed (2) is greater than k (1)!
+The window "AABAB" is invalid because changing 2 'B's requires k = 2, 
+but we only have k = 1.'''

@@ -45,3 +45,22 @@ def min_in_Rotated_Array(arr):
 
 arr=list(map(int,input().split()))
 print(min_in_Rotated_Array(arr))
+
+if not arr:
+            return []
+        l=0
+        h=len(arr)-1
+        minm=float("inf")
+        times=-1
+        while l<=h:
+            mid=(l+h)//2
+            if arr[l]<=arr[h]:
+                minm=min(minm,arr[l])
+                break
+            if arr[l]<=arr[mid]:
+                 minm=min(minm,arr[l])
+                 l=mid+1
+            else:
+                h=mid-1
+                minm=min(minm,arr[mid])
+        return minm
